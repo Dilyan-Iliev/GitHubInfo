@@ -7,7 +7,8 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">Creator</th>
+            <th scope="col">Avatar</th>
+            <th scope="col">Owner</th>
             <th scope="col">Repo Name</th>
             <th scope="col">Private / Public</th>
             <th scope="col">Public Address</th>
@@ -17,6 +18,9 @@
         @foreach (var repo in Model)
         {
             <tr>
+                <td>
+                    <img src="@repo.AvatarUrl" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;" />
+                </td>
                 <td>@repo.OwnerName</td>
                 <td>@repo.Name</td>
                 <td>@(repo.IsRepoPrivate ? "Private" : "Public")</td>

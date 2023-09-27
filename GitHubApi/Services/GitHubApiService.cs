@@ -1,7 +1,6 @@
 ﻿namespace GitHubApi.Services
 {
     using GitHubApi.Models;
-    using Microsoft.AspNetCore.Mvc;
     using Octokit;
 
     public class GitHubApiService
@@ -23,7 +22,6 @@
             }
             catch (ApiException)
             {
-
                 throw;
             }
         }

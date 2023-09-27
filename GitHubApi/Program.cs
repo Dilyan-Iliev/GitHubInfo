@@ -89,20 +89,6 @@ namespace GitHubApi
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            //app.Map("/", (HttpContext ctx) =>
-            //{
-            //    ctx.GetTokenAsync("access_token");
-            //    return ctx.User.Claims.Select(x => new { x.Type, x.Value }).ToList();
-            //});
-
-            //app.Map("/login", (HttpContext ctx) =>
-            //{
-            //    return Results.Challenge(new Microsoft.AspNetCore.Authentication.AuthenticationProperties()
-            //    {
-            //        RedirectUri = "https://localhost:7137/"
-            //    } ,authenticationSchemes: new List<string>() { "github" });
-            //});
-
             app.Run();
         }
     }
