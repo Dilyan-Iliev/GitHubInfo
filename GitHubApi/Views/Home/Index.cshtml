@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model IEnumerable<RepoViewModel>
 
+@model IEnumerable<RepoViewModel>
 
 <table class="table table-hover">
     <thead>
@@ -11,7 +11,6 @@
             <th scope="col">Owner</th>
             <th scope="col">Repo Name</th>
             <th scope="col">Private / Public</th>
-            <th scope="col">Public Address</th>
         </tr>
     </thead>
     <tbody>
@@ -22,10 +21,68 @@
                     <img src="@repo.AvatarUrl" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;" />
                 </td>
                 <td>@repo.OwnerName</td>
-                <td>@repo.Name</td>
+                <td>
+                    <a href="javascript:void(0);" onclick="openPopup('@repo.Name', '@repo.CreatedAt', '@repo.PublicAddress');">
+                        @repo.Name
+                    </a>
+                </td>
                 <td>@(repo.IsRepoPrivate ? "Private" : "Public")</td>
-                <td><a href="@repo.PublicAddress" target="_blank">Link</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+
+<div id="repoDetails" class="popup">
+    <a href="javascript:void(0);" onclick="closePopup();" class="close-button">X</a>
+    <h2>Repository Details</h2>
+    <p><strong>Repo Name:</strong> <span id="repoName"></span></p>
+    <p><strong>Created At:</strong> <span id="createdAt"></span></p>
+    <p><strong>Public Address:</strong> <a id="publicAddress" target="_blank"></a></p>
+</div>
+
+<style>
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        z-index: 1000;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: #333;
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    function openPopup(repoName, createdAt, publicAddress) {
+        document.getElementById('repoDetails').style.display = 'block';
+        document.getElementById('repoName').textContent = repoName;
+        document.getElementById('createdAt').textContent = createdAt;
+        document.getElementById('publicAddress').href = publicAddress;
+        document.getElementById('publicAddress').textContent = publicAddress;
+    }
+
+    function closePopup() {
+        document.getElementById('repoDetails').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        var popup = document.getElementById('repoDetails');
+        if (event.target == popup) {
+            closePopup();
+        }
+    }
+</script>

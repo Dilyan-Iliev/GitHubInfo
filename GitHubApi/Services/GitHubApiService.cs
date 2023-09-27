@@ -56,11 +56,5 @@
             })
             .ToList();
         }
-
-        public async Task<Repository> RepositoryDetails(string owner, string repoName)
-        {
-            Repository repository = await this.gitHubClient.Repository.Get(owner, repoName);
-            return repository;
-        }
     }
 }

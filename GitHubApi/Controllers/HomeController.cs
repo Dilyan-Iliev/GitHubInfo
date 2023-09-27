@@ -55,20 +55,6 @@
             return BadRequest();
         }
 
-        public async Task<IActionResult> Details(string owner, string repoName)
-        {
-            // Call your service method to retrieve repository details
-            Repository repository = await this.gitHubApiService.RepositoryDetails(owner, repoName);
-
-            if (repository != null)
-            {
-                return View(repository); // Pass the repository details to a view
-            }
-
-            // Handle the case where the repository doesn't exist or there's an error
-            return View("RepositoryNotFound");
-        }
-
         public IActionResult Privacy()
         {
             return View();
