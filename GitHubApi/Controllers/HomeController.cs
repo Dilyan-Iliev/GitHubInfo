@@ -35,7 +35,7 @@
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var userClaims = User.Claims.Select(x => new { x.Type, x.Value }).ToList();
 
-            var result = this.gitHubApiService.GetReposForView(repos);
+            var result = await this.gitHubApiService.GetReposForView(repos);
 
             return View(result);
         }

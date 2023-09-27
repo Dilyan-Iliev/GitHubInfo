@@ -7,5 +7,7 @@
         public string OwnerName { get; set; } = null!;
         public string CreatedAt { get; set; } = null!;
         public string PublicAddress { get; set; } = null!;
+        public string AvatarUrl { get; set; } = null!;
+        public bool IsRepoPrivate { get; set; }
     }
 }

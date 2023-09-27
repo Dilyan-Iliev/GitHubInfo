@@ -32,7 +32,7 @@
         {
             try
             {
-                var repos = await gitHubClient.Repository.GetAllForUser(username);
+                var repos = await gitHubClient.Repository.GetAllForCurrent();
                 return repos.ToArray();
             }
             catch (ApiException)
@@ -41,15 +41,20 @@
             }
         }
 
-        public IEnumerable<RepoViewModel> GetReposForView(IEnumerable<Repository> repos)
+        public async Task<IEnumerable<RepoViewModel>> GetReposForView(IEnumerable<Repository> repos)
         {
+            var user = await this.GetCurrentUser();
+            var avatarUrl = user.AvatarUrl;
+
             return repos.Select(r => new RepoViewModel
             {
                Id = r.Id,
                Name = r.Name,
                OwnerName = r.Owner.Login,
                CreatedAt = r.CreatedAt.ToString("yyyy-MM-dd"),
-               PublicAddress = r.Url
+               PublicAddress = r.HtmlUrl,
+               AvatarUrl = avatarUrl,
+               IsRepoPrivate = r.Private
             })
             .ToList();
         }

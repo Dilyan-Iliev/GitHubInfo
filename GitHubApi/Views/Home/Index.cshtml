@@ -1,8 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<RepoViewModel>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Creator</th>
+            <th scope="col">Repo Name</th>
+            <th scope="col">Private / Public</th>
+            <th scope="col">Public Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var repo in Model)
+        {
+            <tr>
+                <td>@repo.OwnerName</td>
+                <td>@repo.Name</td>
+                <td>@(repo.IsRepoPrivate ? "Private" : "Public")</td>
+                <td><a href="@repo.PublicAddress" target="_blank">Link</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
